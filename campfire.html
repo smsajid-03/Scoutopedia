@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Campfire Mode - Scout Quiz</title>
+  <style>
+    body { font-family: Arial; padding: 30px; background: #fff3e0; text-align: center; }
+    h1 { color: #ff6f00; }
+    textarea { width: 80%; height: 100px; margin-top: 10px; }
+    button { padding: 10px 20px; margin: 10px; font-size: 16px; cursor: pointer; }
+    .song { background: #ffe0b2; padding: 10px; margin: 10px 0; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <h1>Campfire Mode</h1>
+
+  <div id="song-container" class="song"></div>
+
+  <textarea id="note" placeholder="Write your note here..."></textarea><br>
+  <button onclick="saveNote()">Save Note</button>
+
+  <script>
+    const songs = [
+      "Scout song 1 lyrics...",
+      "Scout song 2 lyrics...",
+      "Scout song 3 lyrics..."
+    ];
+
+    let current = 0;
+
+    function showSong() {
+      if(current >= songs.length) {
+        document.getElementById("song-container").innerText = "No more songs!";
+        return;
+      }
+      document.getElementById("song-container").innerText = songs[current];
+    }
+
+    function saveNote() {
+      const note = document.getElementById("note").value;
+      if(note) {
+        localStorage.setItem("songNote" + current, note);
+        alert("Note saved!");
+        document.getElementById("note").value = "";
+      }
+      current++;
+      showSong();
+    }
+
+    showSong();
+  </script>
+</body>
+</html>
