@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Normal Quiz - Scout Quiz</title>
+  <style>
+    body { font-family: Arial; text-align: center; padding: 30px; background: #f5f5f5; }
+    h1 { color: #2a7ae2; }
+    button { padding: 10px 20px; margin: 10px; font-size: 16px; cursor: pointer; }
+    #quiz-container { margin-top: 30px; }
+  </style>
+</head>
+<body>
+  <h1>Normal Quiz</h1>
+  <div id="quiz-container"></div>
+  <div id="score" style="margin-top:20px; font-size:18px;"></div>
+
+  <script>
+    // Example questions
+    const questions = [
+      { question: "What is the first rule of campfire safety?", options: ["Keep water nearby", "Use gasoline", "Ignore it"], answer: 0 },
+      { question: "Which knot is used to tie two ropes together?", options: ["Square knot", "Bowline", "Clove hitch"], answer: 0 },
+      { question: "Extreme Hard Question Example", options: ["Option1", "Option2", "Option3"], answer: 1, extreme:true }
+    ];
+
+    let current = 0;
+    let score = 0;
+
+    function showQuestion() {
+      if(current >= questions.length) {
+        document.getElementById("quiz-container").innerHTML = "<h2>Quiz Finished!</h2>";
+        document.getElementById("score").innerText = "Your Score: " + score + "/" + questions.length;
+        document.body.style.background = "#f5f5f5"; // reset background
+        return;
+      }
+
+      let q = questions[current];
+
+      // Extreme quiz trigger: randomly for normal questions
+      if(!q.extreme && Math.random() < 0.3) { // 30% chance
+        q = questions.find(item => item.extreme);
+        document.body.style.background = "red";
+      } else {
+        document.body.style.background = "#f5f5f5";
+      }
+
+      let html = `<h2>${q.question}</h2>`;
+      q.options.forEach((opt,i)=>{
+        html += `<button onclick="checkAnswer(${i})">${opt}</button><br>`;
+      });
+
+      document.getElementById("quiz-container").innerHTML = html;
+    }
+
+    function checkAnswer(selected) {
+      const q = questions[current];
+      if(selected === q.answer) score++;
+      current++;
+      showQuestion();
+    }
+
+    showQuestion();
+  </script>
+</body>
+</html>
