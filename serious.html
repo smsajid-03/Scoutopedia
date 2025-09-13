@@ -5,32 +5,72 @@
   <style>
     body { font-family: Arial; padding: 30px; background: #e0f7fa; }
     h1 { color: #00796b; text-align: center; }
-    h2 { color: #004d40; margin-top: 20px; }
-    .qa { background: #b2dfdb; padding: 10px; margin: 5px 0; border-radius: 5px; }
+    button.category {
+      width: 100%;
+      text-align: left;
+      padding: 10px;
+      margin: 5px 0;
+      font-size: 18px;
+      background: #004d40;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .qa-container {
+      display: none;
+      background: #b2dfdb;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+    .qa { margin: 5px 0; }
   </style>
 </head>
 <body>
   <h1>Serious Mode - Scout Questions</h1>
 
-  <h2>Camping</h2>
-  <div class="qa">
-    <strong>Q:</strong> What is the first rule of campfire safety?<br>
-    <strong>A:</strong> Always keep water nearby and never leave fire unattended.
-  </div>
-  <div class="qa">
-    <strong>Q:</strong> How do you properly pitch a tent?<br>
-    <strong>A:</strong> Choose a flat area, stake corners tightly, and secure guy lines.
-  </div>
-
-  <h2>Knots</h2>
-  <div class="qa">
-    <strong>Q:</strong> Which knot is used to tie two ropes together?<br>
-    <strong>A:</strong> Square knot (reef knot).
-  </div>
-  <div class="qa">
-    <strong>Q:</strong> Which knot is used to make a fixed loop?<br>
-    <strong>A:</strong> Bowline knot.
+  <button class="category" onclick="toggle('camping')">Camping</button>
+  <div id="camping" class="qa-container">
+    <div class="qa">
+      <strong>Q:</strong> What is the first rule of campfire safety?<br>
+      <strong>A:</strong> Always keep water nearby and never leave fire unattended.
+    </div>
+    <div class="qa">
+      <strong>Q:</strong> How do you properly pitch a tent?<br>
+      <strong>A:</strong> Choose a flat area, stake corners tightly, and secure guy lines.
+    </div>
   </div>
 
+  <button class="category" onclick="toggle('knots')">Knots</button>
+  <div id="knots" class="qa-container">
+    <div class="qa">
+      <strong>Q:</strong> Which knot is used to tie two ropes together?<br>
+      <strong>A:</strong> Square knot (reef knot).
+    </div>
+    <div class="qa">
+      <strong>Q:</strong> Which knot is used to make a fixed loop?<br>
+      <strong>A:</strong> Bowline knot.
+    </div>
+  </div>
+
+  <button class="category" onclick="toggle('firstaid')">First Aid</button>
+  <div id="firstaid" class="qa-container">
+    <div class="qa">
+      <strong>Q:</strong> What is the first step in CPR?<br>
+      <strong>A:</strong> Check for responsiveness and call for help.
+    </div>
+    <div class="qa">
+      <strong>Q:</strong> How do you treat a minor burn?<br>
+      <strong>A:</strong> Cool under running water and cover with a clean cloth.
+    </div>
+  </div>
+
+  <script>
+    function toggle(id) {
+      const container = document.getElementById(id);
+      container.style.display = (container.style.display === "block") ? "none" : "block";
+    }
+  </script>
 </body>
 </html>
